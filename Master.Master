@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="Website.Master" %>
+<%-- The doctype is set to strict, so that IE6 uses the standards mode instead of quirks mode. Note that the real page output is transitional. --%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head runat="server" id="head">
+    <title></title>
+	<asp:Literal runat="server" ID="litMetaDescription" />
+	<asp:Literal runat="server" ID="litMetaKeywords" />
+	<asp:Literal runat="server" ID="litMetaContentLanguage" />
+	<meta name='robots' content='index,follow' />
+	<meta name='generator' content='SmallCMS.NET' />
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<link type='image/x-icon' href='/favicon.ico' rel='shortcut icon' />
+	<link href="/CMS/CMS.css" type="text/css" rel="stylesheet" />
+	<link href="/css/superfish.css" type="text/css" rel="stylesheet" />
+    <link href="/css/demo.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="/Javascript/jquery-1.3.2.min.js" ></script>
+	<script type="text/javascript" src="/Javascript/hoverIntent.js"></script>
+	<script type="text/javascript" src="/Javascript/superfish.js"></script>
+	<script type='text/javascript'>
+		function escapeHTML(str){var div=document.createElement('div');var text=document.createTextNode(str);div.appendChild(text);return div.innerHTML;};
+		jQuery.noConflict();
+		jQuery(document).ready(function() {
+			jQuery('ul.sf-menu').superfish({speed: 120});
+		});
+		var addthis_config = { services_exclude: 'print', ui_cobrand: "SmallCMS.NET", data_use_flash: false };
+	</script>
+
+</head>
+<body class="smallcms">
+    <form id="form1" runat="server">
+    <div class="content">
+    	<%-- ScriptManager --%>
+		<asp:ScriptManager ID="SCRMGR" runat="Server" EnableScriptGlobalization="true" EnableScriptLocalization="true" />
+
+		<%-- AdminBar --%>
+		<asp:PlaceHolder runat="server" ID="phAdminBar" /> 
+
+		<%-- Header --%>
+		<div class="header clearfix">
+			<asp:LoginView runat="server">
+				<AnonymousTemplate>
+					<a href="/login.aspx" class="login">Login</a>
+				</AnonymousTemplate>
+				<LoggedInTemplate>
+					<asp:LoginName runat="server" CssClass="loginname" />
+					<asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutPageUrl="/" CssClass="logout" />
+				</LoggedInTemplate>
+			</asp:LoginView>
+			<asp:Panel runat="server" DefaultButton="btnSearch" CssClass="search">
+				<asp:TextBox runat="server" ID="txtKeywords" />
+				<asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click" />
+			</asp:Panel>
+		</div>
+    
+		<%-- HeaderBar --%>
+		<div class="headerbar clearfix">
+			<%-- Language switch --%>
+			<div id="languageswitch">
+				<asp:LinkButton runat="server" ID="btnEN" CommandArgument="en" OnClick="btnLanguage_Click" CssClass="dimmed" EnableViewState="false">
+					<img src="/Images/flag_usa.png" alt="Switch to English language" title="English" />
+				</asp:LinkButton>
+				<asp:LinkButton runat="server" ID="btnNL" CommandArgument="nl" OnClick="btnLanguage_Click" CssClass="dimmed" EnableViewState="false">
+					<img src="/Images/flag_netherlands.png" alt="Omschakelen naar Nederlandse taal" title="Nederlands" />
+				</asp:LinkButton>
+			</div>
+			<%-- Menu --%>
+			<cms:Menu runat="server" SiteMapProviderName="WebSiteMapProvider.{0}" ContainerCssClass="sf-menu" ExcludeStartingNode="true" EnableSecurityTrimming="true" HashInMenuTemplate="/HashInMenu.aspx" />
+			<%-- AddThis Button --%>
+			<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=smallcms"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?pub=smallcms"></script>
+		</div>
+    
+		<%-- Main --%>
+		<div class="main clearfix">
+			<asp:ContentPlaceHolder ID="CPH1" runat="server" />
+        </div>
+       
+		<%-- Footer --%>
+		<div class="footerbar clearfix">
+			<div style="float:left;padding:18px 4px">
+				Open Source 2008 - <%= DateTime.Now.Year %> SmallCMS
+			</div>
+			<div style="float:right;padding:18px 4px">
+				<cms:Menu runat="server" SiteMapProviderName="FooterSiteMapProvider" ContainerCssClass="horizontalmenu" ItemSeparator="-" ExcludeStartingNode="true" EnableSecurityTrimming="true" />
+			</div>
+		</div>
+    </div>
+	<%-- AdSense --%>
+    <cms:GoogleAdSense runat="server" FileName="/AdSense120x600.htm" />
+    </form>
+    <cms:GoogleAnalytics runat="server" />
+</body>
+</html>

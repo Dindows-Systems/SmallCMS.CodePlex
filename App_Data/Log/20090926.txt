@@ -1,0 +1,6 @@
+DateTime	Source	Code	Message
+20090926.103313	AssemblyBuilder	1003	Application compilation is starting.
+20090926.103313	AssemblyBuilder	1004	Application compilation finished.
+20090926.103314	AssemblyBuilder	1003	Application compilation is starting.
+20090926.103314	AssemblyBuilder	1004	Application compilation finished.
+20090926.103914	HttpRuntime	1002	Application is shutting down. Reason: Appdomain was explicitly unloaded.

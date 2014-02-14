@@ -1,0 +1,9 @@
+<browsers>
+
+  <browser refID="Default">
+    <controlAdapters>
+      <adapter controlType="System.Web.UI.HtmlControls.HtmlForm" adapterType="CMS.FormRewriterControlAdapter" />
+    </controlAdapters>
+  </browser>
+
+</browsers>
